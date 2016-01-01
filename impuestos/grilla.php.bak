@@ -1,0 +1,110 @@
+<?php require_once("../conexion/conexion.php");
+$hoy=date(Y."-".m."-".d); //echo $hoy;
+$año=date(Y);//echo $año;
+$mes=date(m);//echo $mes;
+$dia=date(d);//echo $dia;
+?>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+  </head>
+  <body>
+    <table align="right" border="1" width="700">
+      <tbody>
+        <tr bgcolor="red">
+          <td align="center" width="7.7%">
+            <h3><b>A�O</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Ene</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Feb</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Mar</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Abr</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>May</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Jun</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Jul</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Ago</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Set</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Oct</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Nov</b></h3>
+          </td>
+          <td align="center" width="7.7%">
+            <h3><b>Dic</b></h3>
+          </td>
+        </tr>
+        <?php 
+$sql="SELECT day(fecha) as dia , SUM(publico * cant) as total,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto like '%TARJETA%' and year(fecha)=$año and month(fecha)=$mes) as tarjeta,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto='RETIRO' and year(fecha)=$año and month(fecha)=$mes) as retiro,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto='CAJA' and year(fecha)=$año and month(fecha)=$mes) as caja,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto='GASTOS' and year(fecha)=$año and month(fecha)=$mes) as gastos,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto='MUTUAL' and year(fecha)=$año and month(fecha)=$mes) as mutual,(SELECT SUM(publico * cant) from facturados where day(fecha)=dia and producto='SALDO' and year(fecha)=$año and month(fecha)=$mes) as saldofrom facturadoswhere month(fecha)=$mesand year(fecha)=$añogroup by year(fecha), day(fecha)";$res=mysql_query($sql,$con);while ($reg=mysql_fetch_array($res)){?>
+        <tr align="center">
+          <td align="center">
+            <h3><b><?php $dia=$reg["dia"]; echo $dia; ?></b></h3>
+            <br>
+          </td>
+          <!--Este es el dia del mes-->
+          <td>
+            <h3><b><?php $total=$reg["total"]; echo "$",$total; ?></b></h3>
+            <br>
+          </td>
+          <!--Este es el efectivo de la caja-->
+          <td>
+            <h3><b><?php $tarjeta=$reg["tarjeta"]; echo "$",$tarjeta; ?></b></h3>
+            <br>
+          </td>
+          <!--Estas son tarjetas del dia-->
+          <td>
+            <h3><b><?php $retiro=$reg["retiro"]; echo "$",$retiro; ?></b></h3>
+            <br>
+          </td>
+          <!--Estos son retiros del dia-->
+          <td>
+            <h3><b><?php $caja=$reg["caja"]; echo "$",$caja; ?></b></h3>
+            <br>
+          </td>
+          <!--Esta es la caja de inicio dia-->
+          <td>
+            <h3><b><?php $gastos=$reg["gastos"]; echo "$",$gastos; ?></b></h3>
+            <br>
+          </td>
+          <!--Estos son gastos del dia-->
+          <?php $saldo=$reg["saldo"];?>
+          <!--Estos son los Saldos a pagar-->
+          <?php $mutual=$reg["mutual"];?>
+          <td>
+            <h3><b><?php $venta=$total-$tarjeta-$retiro-$gastos-$caja-$mutual; echo "$",$venta; ?></b></h3>
+            <br>
+          </td>
+          <!--Esta es la venta del dia-->
+        </tr>
+        <?php }
+?> </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr height="40 ">
+        </tr>
+        <tr>
+          <?php include("grillameses.php");	?>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

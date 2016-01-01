@@ -1,0 +1,76 @@
+INSTALACION DEL SERVIDOR
+  sudo apt-get install apache2 -y
+   
+sudo apt-get install php5 libapache2-mod-php5 -y
+
+Reiniciamos el servidor web:
+
+sudo /etc/init.d/apache2 restart
+
+
+
+
+resguardo de BBDD
+
+$ mysqldump -h localhost -u usuario -p basededatos | gzip > basededatos-2009-04-30.sql.gz
+
+
+restaurar BBDD
+
+$ gunzip < basededatos-2009-04-30.sql.gz | mysql -h localhost -u usuario -p basededatos
+
+ <?
+echo "Su base esta siendo restaurada.......";
+
+system("cat nombre_de_la_base.sql | mysql --host=servidor_sql --user=nombre_de_la_base --password=contraseña nombre_de_la_base");
+echo "Fin. Su base está emplazada en su alojamiento.";
+?>
+
+
+En los ejemplos anteriores localhost simboliza al hostname de la base de datos, usuario al nombre de usuario que utilizaremos para conectarnos a MySQL, basededatos al nombre de la base de datos y basededatos-2009-04-30.sql.gz al archivo en donde vamos a guardar la copia de resguardo de la base de datos.
+
+FORMATEAR FECHAS
+
+DATE_FORMAT(fecha,'%d-%m-%Y') as fecha
+.........................................................................
+
+IMPORTAR SQL
+...........................................................................
+comando original:
+
+IMPORTAR BBDD
+
+mysql -u USUARIO -p B.Datos < B.DATOS.sql
+
+
+mysql -u root -p optica < /var/www/optica/optica.sql
+
+.............................................................................
+VARIOS REGISTROS A LA VEZ
+
+INSERT INTO tabla1 (columna_id1, columna_id2, columna_data1) VALUES (1,1,1),(2,2,2),(3,3,3);
+
+UPDATE tabla1 SET columna_data1=50001 WHERE columna_id1=50001 AND columna_id2=6000;
+
+te voy a dar la idea de como podrias solucionarlo con PHP que es el lenguaje que domino un poco mas, conste que es solo la idea tendras que averiguar mas sintaxis.
+
+
+for(int $i:1;$i<=10;$i++){
+mysql_connect("","","",""); ............
+mysql_query("UPDATE tabla1 SET columna_data1=5000$i WHERE columna_id1=50001 AND columna_id2=6000;);
+
+
+..........................................
+
+BAJAR SITIOS COMPLETOS
+
+wget --random-wait -r -p -U mozilla http://www.ejemplo.com
+
+
+
+ABRIR LINK EN OTRA VENTANA
+
+<a href="enlace-destino" target="_blank">texto</a>
+
+&lt;A HREF="nueva_pagina.php?var1=x&var2=y&var3=z" TARGET="_blanc">Texto del enlace&lt;/A>
+

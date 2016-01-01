@@ -1,0 +1,26 @@
+//*******************************************************************************************************
+//funci�n para validar ingreso de clientes
+function validar2()
+{
+	var form =document.form;
+	if (form.dn.value==0)
+	{
+		alert("ingrese el DNI");
+		form.dn.value="";
+		form.dn.focus();
+		return false;
+	}
+
+	$DN = form.dn.value;
+	$sql = "SELECT * FROM clientes WHERE dni = '$DN' ";
+	$res=mysql_query($sql,$con);
+	$reg=mysql_fetch_array($res)
+	if (form.dn.value$reg > 0)
+	
+	{
+		alert("Este Cliente ya esta ingresado");
+		form.dn.value="";
+		form.dn.focus();
+		return false;
+
+	}
