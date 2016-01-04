@@ -1,4 +1,6 @@
 <?php
+//print_r($_GET)
+
 require_once("../conexion/conexion.php");
 $sql="delete from ivaventas
 where

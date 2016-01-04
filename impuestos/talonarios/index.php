@@ -1,10 +1,10 @@
 <?php
-require_once("../conexion/conexion.php");
+require_once("../../conexion/conexion.php");
 ?>
 <html>
 	<head>
 	<title>
-	Impuestos
+	Ingresar Facturas Ventas
 	</title>
 	<style type="text/css">
 		.encabezado{ background-color:#666666; color:#FFFFFF; font-weight:bold}
@@ -25,20 +25,21 @@ require_once("../conexion/conexion.php");
 	</script>
 	</head>
 
-	<BODY OnLoad="document.buscador.s.focus();">
+	<BODY>
 
-	<?php
-	include("grilla.php");
-	?>
+
 
 		<table width="350" align="center">
 		<tr>
-			<td valign="top" align="right" width="200" colspan="2">
-			<a href="agregar.php" title="Agregar Venta"><img src="../ima/add48x48.png" border="0"></a>
+			<td valign="top" align="right" width="200" colspan="5">
+			<a href="agregar.php" title="Agregar Venta"><img src="../../ima/add48x48.png" border="0"></a>
 			</td>
 		</tr>
 
 		<tr class="encabezado">
+			<td valign="top" align="center" width="100">
+			Numero
+			</td>
 			<td valign="top" align="center" width="100">
 			Fecha
 			</td>
@@ -66,6 +67,11 @@ require_once("../conexion/conexion.php");
 
 			<td valign="top" align="center" width="100">
 			<?php
+			echo $reg["numero"];
+			?>
+			</td>
+			<td valign="top" align="center" width="100">
+			<?php
 			echo $reg["fecha"];
 			?>
 			</td>
@@ -75,9 +81,9 @@ require_once("../conexion/conexion.php");
 			?>
 			</td>
 			<td valign="top" align="center" width="25">
-			<a href="modificar.php?id=<?php echo $reg["id"];?>" title="Modificar"><img src="../ima/editar.png" border="0"></a>
+			<a href="modificar.php?id=<?php echo $reg["id"];?>" title="Modificar"><img src="../../ima/editar.png" border="0"></a>
 			<td valign="top" align="center" width="25">
-			<a href="javascript:void(0)" title="Eliminar" onClick="eliminar('<?php echo $reg["id"];?>')"><img src="../ima/eliminar.png" border="0"></a>
+			<a href="javascript:void(0)" title="Eliminar" onClick="eliminar('<?php echo $reg["id"];?>')"><img src="../../ima/eliminar.png" border="0"></a>
 			</td>
 		</tr>
 

@@ -1,5 +1,6 @@
 <?php
 require_once("../conexion/conexion.php");
+//$mes=date(Y."-".m); 
 ?>
 <html>
 	<head>
@@ -25,11 +26,9 @@ require_once("../conexion/conexion.php");
 	</script>
 	</head>
 
-	<BODY OnLoad="document.buscador.s.focus();">
+	<BODY>
 
-	<?php
-	include("grilla.php");
-	?>
+
 
 		<table width="350" align="center">
 		<tr>
@@ -52,7 +51,10 @@ require_once("../conexion/conexion.php");
 		</tr>
 
 				<?php
-				$sql="SELECT fecha, venta from ivaventas order by fecha desc";
+				$sql="SELECT * 
+				from ivaventas 
+				order by fecha desc
+				limit 60";
 				$res=mysql_query($sql,$con);
 				$i=0;
 				while ($reg=mysql_fetch_array($res))
