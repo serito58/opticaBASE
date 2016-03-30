@@ -1,12 +1,16 @@
 <?php
-require_once("../conexion/conexion.php");
+require_once("conexion.php");
 
-$sql="select count(*) as cuantos `familia`.`id_familia`,`familia`.`familia`, `det_fact`.`cant`, `det_fact`.`producto`, `det_fact`.`costo`,det_fact.publico,`proveedores`.`proveedor`
-FROM `familia`, `det_fact`, `proveedores`
-where familia.id_familia=det_fact.flia
-and proveedores.id_proveedor=det_fact.id_proveedor
-and
-producto like '%".$_GET["s"]."%' ";
+$sql="select count(*) as cuantos,*,det_fact.multi * det_lista.costo as publico
+FROM familia,`det_fact`,proveedores,det_lista
+where `det_fact`.`flia` = `familia`.`id_familia`
+and`det_fact`.`id_proveedor` = `proveedores`.`id_proveedor`
+and det_fact.itemlista = det_lista.id_item
+and(
+det_fact.producto like '%".$_GET["s"]."%' 
+or proveedor like '%".$_GET["s"]."%'
+)
+order by producto asc";
 //echo $sql;
 $res=mysql_query($sql,$con);
 if ($reg=mysql_fetch_array($res))
@@ -24,19 +28,27 @@ if (isset($_GET["pos"]))
 {
 	$inicio=0;
 }
-$sql="select `familia`.`id_familia`,`familia`.`familia`,`det_fact`.`id_item`, `det_fact`.`cant`,publico/costo as multi,
- `det_fact`.`producto`, `det_fact`.`costo`,det_fact.publico,`proveedores`.`proveedor`
-FROM `familia`, `det_fact`, `proveedores`
-where familia.id_familia=det_fact.flia
-and proveedores.id_proveedor=det_fact.id_proveedor
-and
-producto like '%".$_GET["s"]."%' 
+$sql="SELECT `familia`.`id_familia` , `familia`.`familia` ,
+`det_fact` .cant, `det_fact` .producto, `det_fact` .multi, det_fact.id_item as item,
+`proveedores`.`proveedor` , `proveedores`.`id_proveedor`, facturas.fecha,
+ det_lista.id_item, det_lista.costo, det_fact.multi * det_lista.costo as publico
+FROM familia,`det_fact`,proveedores,det_lista, facturas
+where `det_fact`.`flia` = `familia`.`id_familia`
+and`det_fact`.`id_proveedor` = `proveedores`.`id_proveedor`
+and det_fact.itemlista = det_lista.id_item
+and det_fact.id_factura=facturas.id_factura
+and(
+det_fact.producto like '%".$_GET["s"]."%'
+or proveedor like '%".$_GET["s"]."%'
+)
+order by producto asc,fecha desc
 limit $inicio,100
 ";
 $res=mysql_query($sql,$con);
 
-
 ?>
+
+
 <html>
 <head>
 <title>
@@ -58,15 +70,26 @@ Listado de Articulos
 	{
 		document.getElementById(id).style.backgroundColor=color;
 	}
+	
+
 </script>
+
 </head>
 <BODY OnLoad="document.buscador.s.focus();">
 <table width="1100px" align="center">
 
 <tr>
-<td valign="top" align="center" width="100%" colspan="7">
+<td valign="top" align="center" width="100%" colspan="5">
 <h3>Listado de Articulos</h3>
 </td>
+
+
+
+<td valign="top" align="center" width="25">
+<input type='button' value="Borrar Ceros">
+<a href="./borrarceros.php?producto=<?php echo $reg["producto"];?>"></a>
+</td>
+
 </tr>
 <!--ac� va el div menu-->
 <div align="center" class="buscador">
@@ -100,6 +123,11 @@ Multi
 <td valign="top" align="center" width="100">
 Proveedor
 </td>
+<td valign="top" align="center" width="100">
+Fecha
+</td>
+<td valign="top" align="center" width="25">
+</td>
 <td valign="top" align="center" width="25">
 </td>
 </tr>
@@ -118,8 +146,8 @@ $i++;
 
 <td valign="top" align="left" width="25">
 <?php
-echo $reg["id_familia"];?>- <?echo $reg["familia"];
-?>
+echo $reg["id_familia"];?>-<?php
+echo $reg["familia"];?>
 </td>
 <td valign="top" align="center" width="10">
 <?php
@@ -138,7 +166,7 @@ echo "$ ", round($reg["costo"],2);
 </td>
 <td valign="top" align="center" width="50">
 <?php
-echo "$ ", $reg["publico"];
+echo "$ ", round($reg["publico"]);
 ?>
 </td>
 <td valign="top" align="center" width="50">
@@ -153,9 +181,18 @@ echo $reg["proveedor"];
 ?>
 </td>
 
+<td valign="top" align="center" width="100">
+<?php
+echo $reg["fecha"];
+?>
+</td>
 
 <td valign="top" align="center" width="25">
-<a href="../facturas/detalle/modifitem.php?id_item=<?php echo $reg["id_item"];?>" title="Modificar"><img src="ima/editar.png" border="0"></a>
+<a href="./modificar.php?id_item=<?php echo $reg["item"];?>" title="Modificar"><img src="ima/editar.png" border="0"></a>
+</td>
+
+<td valign="top" align="center" width="25">
+<a href="javascript:void(0)" title="Eliminar" onClick="eliminar('<?php echo $reg["item"]?>')"><img src="ima/eliminar.png" border="0"></a>
 </td>
 
 <?php
@@ -163,5 +200,6 @@ echo $reg["proveedor"];
 ?>
 
 </table>
+
 </body>
 </html>

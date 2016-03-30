@@ -2,7 +2,7 @@
 require_once("../conexion/conexion.php");
 
 $sql="select count(*) as cuantos,
-FROM 'cristal2'
+FROM 'cristal'
 nombre like '%".$_GET["s"]."%' order by producto asc";
 //echo $sql;
 $res=mysql_query($sql,$con);
@@ -22,7 +22,7 @@ if (isset($_GET["pos"]))
 	$inicio=0;
 }
 $sql="SELECT *
-FROM cristal2
+FROM cristal
 where 
 nombre like '%".$_GET["nombre"]."%' 
 and (tipo like '%".$_GET["tipo"]."%'
@@ -40,7 +40,7 @@ $res=mysql_query($sql,$con);
 <html>
 <head>
 <title>
-Listado de Cristales
+Listado de Articulos
 </title>
 <style type="text/css">
 	.encabezado{ background-color:#666666; color:#FFFFFF; font-weight:bold}

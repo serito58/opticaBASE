@@ -86,7 +86,7 @@ echo $reg["id_familia"];?>- <?echo $reg["familia"];
 </td>
 <td valign="top" align="center" width="25">
 <?php
-echo $reg["cant"];
+echo chao_tilde($reg["cant"]);
 ?>
 </td>
 <td valign="top" align="left" width="200">

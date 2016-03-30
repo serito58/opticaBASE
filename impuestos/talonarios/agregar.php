@@ -1,8 +1,7 @@
 <html>
 <?php
-require_once ("../conexion/conexion.php");
-//print_r($_GET);
-//print_r($_POST);
+require_once ("../../conexion/conexion.php");
+
 ?>
 
 <head>
@@ -10,7 +9,7 @@ require_once ("../conexion/conexion.php");
 <script language="javascript" type="text/javascript" src="js/funciones.js"></script>
 </head>
 
-<body OnLoad="document.form.fecha.focus();" >
+<body OnLoad="document.form.numero.focus();" >
 <form action="add.php" method="post" name="form">
 <table align="center" width="150">
 <tr>
@@ -19,6 +18,14 @@ require_once ("../conexion/conexion.php");
 </td>
 </tr>
 
+<tr>
+<td align="right" valign="top" width="100">
+Numero
+</td>
+<td valign="top" align="left" width="50">
+<input type="text" name="numero" />
+</td>
+</tr>
 
 <tr>
 <td align="right" valign="top" width="100">
@@ -31,10 +38,10 @@ Fecha
 
 <tr>
 <td align="right" valign="top" width="100">
-Venta
+Total
 </td>
 <td valign="top" align="left" width="50">
-<input type="text" name="venta" />
+<input type="text" name="total" />
 </td>
 </tr>
 

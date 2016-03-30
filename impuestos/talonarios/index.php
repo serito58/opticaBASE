@@ -4,7 +4,7 @@ require_once("../../conexion/conexion.php");
 <html>
 	<head>
 	<title>
-	Ingresar Facturas Ventas
+	Ingresar Talonarios de Ventas
 	</title>
 	<style type="text/css">
 		.encabezado{ background-color:#666666; color:#FFFFFF; font-weight:bold}
@@ -26,7 +26,13 @@ require_once("../../conexion/conexion.php");
 	</head>
 
 	<BODY>
-
+	<table width="100%" align="center">
+	<tr>
+	<td valign="top" align="center" width="100%" colspan="5">
+	<h3>Ingresar Talonarios de Ventas</h3>
+	</td>
+	</tr>
+	</table>
 
 
 		<table width="350" align="center">
@@ -53,7 +59,7 @@ require_once("../../conexion/conexion.php");
 		</tr>
 
 				<?php
-				$sql="SELECT fecha, venta from ivaventas order by fecha desc";
+				$sql="SELECT * from talonarios order by numero desc limit 60";
 				$res=mysql_query($sql,$con);
 				$i=0;
 				while ($reg=mysql_fetch_array($res))
@@ -77,7 +83,7 @@ require_once("../../conexion/conexion.php");
 			</td>
 			<td valign="top" align="center" width="200">
 			<?php
-			echo "$",$reg["venta"];
+			echo "$",$reg["total"];
 			?>
 			</td>
 			<td valign="top" align="center" width="25">

@@ -1,13 +1,35 @@
 <?php
 require_once("conexion.php");
-$mes=date(Y."-".m."-".d);
-//print_r($mes)
+$hoy=date(Y."-".m."-".d); 
 ?>
 <html>
 <head>
 
+<table border="1">
+  <tbody>
+   
+    <tr align="center">
+      <td>DEL DIA</td>
+<!--..............................TOTAL DIARIO..................................-->
+      <td align="center">
+<?php
+$result = mysql_query("SELECT SUM(publico * cant) as total1 from facturados 
+where 
+fecha like '%$hoy%'");  
+$row = mysql_fetch_array($result, MYSQL_ASSOC);
 
-<h4><center>CAJA DIARIA</center></h4>
+?>
+<h3><?php echo "$", $row["total1"]; ?></h3></td>
+<!--................................................................-->
+
+
+
+    </tr>
+ 
+  </tbody>
+</table>
+
+<h4><center>CAJA DEL DIA</center></h4>
 <style type="text/css">
 	.encabezado{ background-color:#666666; color:#FFFFFF; font-weight:bold}
 	.registros{ background-color:#f0f0f0}
@@ -68,8 +90,8 @@ Proveedor
 
 $sql="select * from facturados 
 where
-fecha like '%$mes%'
-order by fecha desc";
+fecha like '%$hoy%'
+order by fecha asc";
 $res=mysql_query($sql,$con);
 
 while ($reg=mysql_fetch_array($res))

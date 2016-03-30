@@ -115,7 +115,7 @@ var MenuPrincipal = [
 		[null,'Ingresar Z diaria','../impuestos/index.php','principal','Ingresar Z Diaria'],
 		[null,'IVA Compras/Ventas','../ventas/iva.php','principal','Ingreso Facturacion'],
 		[null,'IVA Resumen','../impuestos/impuestos.php','principal','Resumen IVA'],
-		[null,'Ingresar Facturas Ventas','../impuestos/talonarios/talonarios.php','principal','Ingresar Facturas Ventas'],
+		[null,'Ingresar Facturas Ventas','../impuestos/talonarios/index.php','principal','Ingresar Facturas Ventas'],
 	],
 
 	[null,'Copias Seguridad',null,null,'Copias de Seguridad',

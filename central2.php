@@ -180,7 +180,6 @@ window.onload = startBlink;
 
 	<tr height="200px">
 
-		<td><div align="center"><img src="img/codekamxv1.6.png" width="397" height="57" border="0" /></div></td>
 
 	</tr>
 

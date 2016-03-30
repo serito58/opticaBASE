@@ -17,7 +17,7 @@ id_cristal=".$_POST["id_cristal"]."";
 //echo $sql;
 $res=mysql_query($sql,$con);
 echo "<script type=''>
-	window.location='resultadosadm.php?nombre=".$_POST["nombre"]."';
+	window.location='resultadosadm.php?s=".$_POST["nombre"]."';
 </script>";
 mysql_free_result();
 mysql_close();

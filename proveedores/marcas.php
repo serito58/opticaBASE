@@ -86,8 +86,11 @@ Listado de Marcas
 <td valign="top" align="center" width="250">
 Proveedor
 </td>
-<td valign="top" align="center" width="300">
+<td valign="top" align="center" width="250">
 Marcas
+</td>
+<td valign="top" align="center" width="250">
+Telefono
 </td>
 <td valign="top" align="center" width="250">
 Viajante
@@ -115,6 +118,11 @@ echo chao_tilde($reg["proveedor"]);
 <td valign="top" align="left" width="150">
 <?php
 echo chao_tilde($reg["marcas"]);
+?>
+</td>
+<td valign="top" align="left" width="150">
+<?php
+echo $reg["telefono"];
 ?>
 </td>
 <td valign="top" align="left" width="150">

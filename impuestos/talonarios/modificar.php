@@ -1,6 +1,6 @@
 <?php
-require_once("../conexion/conexion.php");
-$sql="select * from ivaventas where id=".$_GET["id"]."";
+require_once("../../conexion/conexion.php");
+$sql="select * from talonarios where id=".$_GET["id"]."";
 $res=mysql_query($sql,$con);
 ?>
 <html>
@@ -27,16 +27,25 @@ if ($reg=mysql_fetch_array($res))
 Fecha
 </td>
 <td valign="top" align="left" width="200">
+<input type="text" name="numero" value="<?php echo $reg["numero"];?>" />
+</td>
+</tr>
+
+<tr>
+<td align="right" valign="top" width="200">
+Fecha
+</td>
+<td valign="top" align="left" width="200">
 <input type="text" name="fecha" value="<?php echo $reg["fecha"];?>" />
 </td>
 </tr>
 
 <tr>
 <td align="right" valign="top" width="200">
-Venta
+Total
 </td>
 <td valign="top" align="left" width="200">
-<input type="text" name="venta" value="<?php echo $reg["venta"];?>" />
+<input type="text" name="total" value="<?php echo $reg["total"];?>" />
 </td>
 </tr>
 

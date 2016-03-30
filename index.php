@@ -78,6 +78,8 @@ var MenuPrincipal = [
 		[null,'Articulos','./proveedores/articulos/index.php','principal','Articulos'],
 
 		[null,'Marcas','proveedores/marcas.php','principal','Marcas'],
+
+		[null,'Ingresar Facturas','proveedores/profacturas/agregar.php','principal','Ingresar Facturas'],
 	],
 
 	[null,'VENTAS',null,null,'ventas ',
